@@ -1,0 +1,36 @@
+apply plugin: 'com.android.application'
+
+def keystoreFile = rootProject.file('../signing/kharkiv.keystore')
+
+android {
+    namespace "com.xsiloflex.kharkiv"
+    compileSdk rootProject.ext.compileSdkVersion
+    defaultConfig {
+        applicationId "com.xsiloflex.kharkiv"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode 1
+        versionName "1.0.0"
+    }
+    signingConfigs {
+        app {
+            storeFile keystoreFile
+            storePassword "android"
+            keyAlias "kharkiv"
+            keyPassword "android"
+        }
+    }
+    buildTypes {
+        debug {
+            signingConfig signingConfigs.app
+        }
+        release {
+            signingConfig signingConfigs.app
+            minifyEnabled false
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+}
